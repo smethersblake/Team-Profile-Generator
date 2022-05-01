@@ -13,13 +13,49 @@ const startApp = () =>
 const addEmployee = () => {
     return inquirer.prompt([
         {
-            type: 'confirm',
-            name: 'selcectEmployee',
-            message: 'Would you like to add an employee?',
-            default: true
-        }
+            type: 'text',
+            name: 'managerName',
+            message: 'Whats is your managers name for the project?'
+        },
+        {
+            type: 'text',
+            name: 'managerID',
+            message: "What is the manager's employee ID number?"
+        },
+        {
+            type: 'text',
+            name: 'managerEmail',
+            message: "What is the manager's email address?"
+        },
+        {
+            type: 'text',
+            name: 'managerOfficeNumber',
+            message: "What is the manager's office number?"
+        },
+        // {
+        //     type: 'confirm',
+        //     name: 'selcectEmployee',
+        //     message: 'Would you like to add an employee to your team?',
+        //     default: true
+        // }
         ])
     .then((answers) => {
+        const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
+        employeeList.push(manager)
+        employeeCheck()
+    }) 
+}
+const employeeCheck = () =>
+{
+    return inquirer.prompt([
+        {
+            type: 'confirm',
+            name: 'selcectEmployee',
+            message: 'Would you like to add an employee to your team?',
+            default: true
+        }
+    ]).then((answers) =>
+    {
         if(answers.selcectEmployee)
         {
             pickTeam()
@@ -28,7 +64,8 @@ const addEmployee = () => {
         {
             generatePage()
         }
-    }) 
+    })
+    
 }
     const pickTeam = () =>
     {
@@ -37,7 +74,7 @@ const addEmployee = () => {
                 type: 'list',
                 name: 'employeeAdd',
                 message: 'What type of employee?',
-                choices: ['Manager', 'Engineer', 'Intern'],
+                choices: ['Engineer', 'Intern'],
             },
             {
                 type: 'text',
@@ -73,24 +110,7 @@ const addEmployee = () => {
             }
         })
     }
-const managerPick = (answers) => 
-{
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'officeNumber',
-            message: 'What is thier office number'
-        }
-    ])
-    .then((data) => {
-        console.log(answers)
-        console.log(data);
-        const manager = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, data.officeNumber)
-        employeeList.push(manager)
-        console.log(employeeList)
-        addEmployee()
-    });
-}
+
 const engineerPick = (answers) => 
 {
     return inquirer.prompt([
@@ -103,7 +123,7 @@ const engineerPick = (answers) =>
     {
         const engineer = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, data.github)
         employeeList.push(engineer)
-        addEmployee()
+        employeeCheck()
     })
 }
 const internPick = (answers) => 
@@ -118,13 +138,12 @@ const internPick = (answers) =>
     {
         const intern = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, data.school)
         employeeList.push(intern)
-        addEmployee()
+        employeeCheck()
     })
 }
 const generatePage = () =>
 {
     console.log('Page created');
-    console.log(employeeList);
     fs.writeFile('index.html', pageTemplate(employeeList), (err) => 
     {
         if(err)
