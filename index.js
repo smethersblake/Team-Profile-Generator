@@ -92,18 +92,18 @@ const employeeCheck = () =>
                 message: "What is the employee's email address?"
             }
         ]).then((answers) => {
-            console.log(answers);
+            // console.log(answers);
             switch (answers.employeeAdd) {
                 case 'Manager':
-                    console.log('Manager');
+                    // console.log('Manager');
                     managerPick(answers)
                     break;
                 case 'Engineer':
-                    console.log("Engineer");
+                    // console.log("Engineer");
                     engineerPick(answers)
                     break
                 case 'Intern':
-                    console.log('Intern');
+                    // console.log('Intern');
                     internPick(answers)
                 default:
                     break;
@@ -144,7 +144,7 @@ const internPick = (answers) =>
 const generatePage = () =>
 {
     console.log('Page created');
-    fs.writeFile('index.html', pageTemplate(employeeList), (err) => 
+    fs.writeFile('./dist/index.html', pageTemplate(employeeList), (err) => 
     {
         if(err)
         {

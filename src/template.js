@@ -1,6 +1,6 @@
 const generatePage = (team) =>
 {
-    console.log(team);
+    // console.log(team);
     const generateManager = (manager) =>
     {
         return `
@@ -31,6 +31,7 @@ const generatePage = (team) =>
                 <ul class="list-group">
                     <li class="list-group-item">ID: ${engineer.getId()}</li>
                     <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                    <li class="list-group-item">Github: <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></li>
                 </ul>
             </div>
         </div>
@@ -48,6 +49,7 @@ const generatePage = (team) =>
                 <ul class="list-group">
                     <li class="list-group-item">ID: ${intern.getId()}</li>
                     <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+                    <li class="list-group-item">School: ${intern.getSchool()}</li>
                 </ul>
             </div>
         </div>
