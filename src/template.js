@@ -4,7 +4,7 @@ const generatePage = (team) =>
     const generateManager = (manager) =>
     {
         return `
-        <div class="card">
+        <div class="card employee">
             <div class="card-header text-white bg-primary">
                 <h2>${manager.getName()}</h2>
                 <h3 class="card-title">${manager.getRole()}</h3>
@@ -22,7 +22,7 @@ const generatePage = (team) =>
     const generateEngineer = (engineer) =>
     {
         return `
-        <div class="card">
+        <div class="card employee">
             <div class="card-header text-white bg-primary">
                 <h2>${engineer.getName()}</h2>
                 <h3 class="card-title">${engineer.getRole()}</h3>
@@ -40,7 +40,7 @@ const generatePage = (team) =>
     const generateIntern = (intern) =>
     {
         return `
-        <div class="card">
+        <div class="card employee">
             <div class="card-header text-white bg-primary">
             <h2>${intern.getName()}</h2>
             <h3 class="card-title">${intern.getRole()}</h3>
@@ -63,11 +63,11 @@ const generatePage = (team) =>
 
         section.push(team.filter(employee =>
             employee.getRole() === 'Engineer')
-            .map(engineer => generateEngineer(engineer)))
+            .map(engineer => generateEngineer(engineer)).join(''))
 
         section.push(team.filter(employee =>
             employee.getRole() === 'Intern')
-            .map(intern => generateIntern(intern)))
+            .map(intern => generateIntern(intern)).join(''))
         
     return section.join('')
 }
@@ -81,6 +81,7 @@ module.exports = pickedTeam =>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>My Team</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container-fluid">

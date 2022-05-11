@@ -1,0 +1,11 @@
+.jumbotron {
+    border-radius: 0;
+}
+.employee{
+    box-shadow: 6px 6px 6px black;
+    margin: 2rem;
+    border: none;
+}
+.card-body{
+    background-color: lightgray;
+}
